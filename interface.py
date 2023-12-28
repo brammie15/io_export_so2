@@ -131,6 +131,20 @@ class UI_OT_Refresh(bpy.types.Operator):
                 set_object_properties(context, object)
 
         return {'FINISHED'}
+    
+class UI_OT_SettingsInitialize(bpy.types.Operator):
+    bl_idname = "ocarina.settings"
+    bl_label = "Initialize Settings"
+    bl_options = {"INTERNAL", "UNDO"}
+
+
+    def execute(self, context):
+        print("Settings settings")
+        bpy.context.scene.unit_settings.system = 'NONE'
+        bpy.context.space_data.overlay.grid_scale = 1
+        bpy.context.scene.tool_settings.double_threshold = 1
+        bpy.context.scene.tool_settings.use_mesh_automerge = True
+        return {'FINISHED'}
 
 class UI_PT_Material(bpy.types.Panel):
     bl_label = "SharpOcarina"
@@ -245,6 +259,7 @@ class UI_PT_3dview(bpy.types.Panel):
             obj_name = object.name
 
         box = self.layout.box()
+        box.operator('ocarina.settings')
         box.operator('ocarina.refresh')
         box.operator("export_obj_so.export")
         box.label(text="Object: " + obj_name)
@@ -258,6 +273,7 @@ class UI_PT_3dview(bpy.types.Panel):
 classes = (
     UI_OT_MaterialInitializer,
     UI_OT_Refresh,
+    UI_OT_SettingsInitialize,
 
     UI_PT_Material,
     UI_PT_3dview,
