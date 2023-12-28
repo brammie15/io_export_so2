@@ -144,6 +144,8 @@ class UI_OT_SettingsInitialize(bpy.types.Operator):
         bpy.context.space_data.overlay.grid_scale = 1
         bpy.context.scene.tool_settings.double_threshold = 1
         bpy.context.scene.tool_settings.use_mesh_automerge = True
+        bpy.context.space_data.clip_start = 1
+        bpy.context.space_data.clip_end = 1e+10
         return {'FINISHED'}
 
 class UI_PT_Material(bpy.types.Panel):
